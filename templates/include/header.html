@@ -1,0 +1,29 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
+        <a class="navbar-brand" href="/">thes.ml</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item {% if request.resolver_match.url_name == 'posts_list_url' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'posts_list_url' %}">Blog<span class="sr-only">(current)</span></a>
+                </li>
+{#                <li class="nav-item {% if request.resolver_match.url_name == 'clients_list_url' %}active{% endif %}">#}
+{#                    <a class="nav-link" href="{% url 'clients_list_url' %}">Клиенты</a>#}
+{#                </li>#}
+                {#        <li class="nav-item {% if request.resolver_match.url_name == 'contractors_list_url' %}active{% endif %}">#}
+                {#          <a class="nav-link" href="{% url 'contractors_list_url' %}">Поставщики</a>#}
+                {#        </li>#}
+                {#        <li class="nav-item {% if request.resolver_match.url_name == '_list_url' %}active{% endif %}">#}
+                {#          <a class="nav-link" href="{% url 'contractors_list_url' %}">Настройки</a>#}
+                {#        </li>#}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Resume</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

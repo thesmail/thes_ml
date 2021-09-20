@@ -22,9 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '%3ijb5ks!-_dqmu65pk64#&chvjsv@u(^i5w!hcy60s^vlqn5='
+#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '%3ijb5ks!-_dqmu65pk64#&chvjsv@u(^i5w!hcy60s^vlqn5=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = []
 
@@ -39,8 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'pagedown.apps.PagedownConfig',
-    'markdown_deux',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Minsk'
 
 USE_I18N = True
 
@@ -131,3 +133,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 PAGEDOWN_IMAGE_UPLOAD_ENABLED=True
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

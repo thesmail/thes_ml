@@ -1,33 +1,64 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load markdown_deux_tags %}
 
-{% block content %}
-    <h3 class="mt-5 mb-4">Latest publication</h3>
-    {% for post in posts %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="{{ post.img.url }}" class="card-img-top" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
-                        <p class="card-text"><small class="text-muted">{{ post.date_pub }}</small></p>
-                        <p class="card-text">{{ post.body|truncatechars:200 }}</p>
+{% block haedcontent %}
+    <!-- Page Header-->
+    <header class="masthead"
+            style="background-image: url('http://127.0.0.1:8000/media/posts/hegel_pink.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>
+                            QQ
+                        </h1>
+                        <span class="subheading">
+                            A Blog python dev from Russia
+                    </span>
                     </div>
                 </div>
             </div>
         </div>
+    </header>
+{% endblock haedcontent %}
+
+{% block content %}
+    <h1 class="mb-4">Latest publication</h1>
+    {% for post in page_object.object_list %}
+        <!-- Post preview-->
+        <div class="post-preview">
+            <a href="{{ post.get_absolute_url }}">
+                <h2 class="post-title">{{ post.title }}</h2>
+                <h3 class="post-subtitle">{{ post.quo }}</h3>
+            </a>
+            <p class="post-meta">
+                Publication on {{ post.date_pub }}
+            </p>
+        </div>
+        <!-- Divider-->
+        <hr class="my-4"/>
     {% endfor %}
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <nav class="mb-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {% if not prev_url %}disabled{% endif %}">
+                <a class="page-link" href="{{ prev_url }}"><-</a>
+            </li>
+            {% for n in page_object.paginator.page_range %}
+                {% if page_object.number == n %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only"></span></a>
+                    </li>
+                {% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <li class="page-item {% if not next_url %}disabled{% endif %}">
+                <a class="page-link" href="{{ next_url }}">-></a>
+            </li>
         </ul>
     </nav>
 

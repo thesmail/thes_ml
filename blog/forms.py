@@ -2,19 +2,19 @@ from django import forms
 from .models import *
 
 from django.core.exceptions import ValidationError
-from pagedown.widgets import PagedownWidget
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 class PostForm(forms.ModelForm):
-    body = forms.CharField(widget=PagedownWidget())
 
     class Meta:
         model = Post
-        fields = ['title', 'img', 'body']
+        fields = ['title', 'quo', 'body', 'img']
 
         widgets = {
+            'body': SummernoteWidget(),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            # 'img': forms.ImageField(),
-            # 'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'quo': forms.TextInput(attrs={'class': 'form-control'}),
+            'img': forms.FileInput(attrs={'class': 'form-control'})
         }
     def clean_slug(self):
         new_slug = self.cleaned_data['slug'].lower()

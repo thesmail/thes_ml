@@ -8,20 +8,41 @@
     {{ form.media }}
 {% endblock head_extra %}
 
+{% block haedcontent %}
+    <!-- Page Header-->
+    <header class="masthead"
+            style="background-image: url('http://127.0.0.1:8000/media/posts/hegel_pink.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>
+                            Create post
+                        </h1>
+                        <span class="subheading">
+
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock haedcontent %}
+
 {% block content %}
-    <form action="{% url 'post_create_url' %}" method="post">
+    <form enctype="multipart/form-data" action="{% url 'post_create_url' %}" method="post">
         {% csrf_token %}
         {% for field in form %}
-            <div class="form-group">
+            <div class="form-floating">
+                {{ field }}
+                <label class="" for="{{ field.auto_id }}">{{ field.label }}</label>
                 {% if field.errors %}
                     <div class="alert alert-danger">
                         {{ field.errors }}
                     </div>
                 {% endif %}
-                {{ field.label }}
-                {{ field }}
             </div>
         {% endfor %}
-        <button type="submit">Create</button>
+        <button class="btn btn-primary text-uppercase my-4 mx-auto d-block" style="width: 200px;" type="submit">Create</button>
     </form>
 {% endblock %}

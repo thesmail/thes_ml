@@ -1,10 +1,11 @@
 from django.contrib import admin
 
 from .models import Post
-from .forms import PostForm
-# Register your models here.
 
-admin.site.register(Post)
-# @admin.register(Post)
-# class PostModelAdmin(admin.ModelAdmin):
-#     form = PostForm
+from django_summernote.admin import SummernoteModelAdmin
+# from .models import SomeModel
+
+class SomeModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
+    summernote_fields = 'body'
+
+admin.site.register(Post, SomeModelAdmin)

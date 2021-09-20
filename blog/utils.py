@@ -2,14 +2,22 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 
 from .models import *
+# from .views import nav
 
 class ObjectDetailMixin:
     model = None
     template = None
+    # post_bar = None
 
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)
-        return render(request, self.template, context={self.model.__name__.lower(): obj})
+
+        context = {
+            self.model.__name__.lower(): obj,
+            'post_bar': self.model.objects.filter(nav_status=True)
+        }
+
+        return render(request, self.template, context=context)
 
 class ObjectCreateMixin:
     form_model = None

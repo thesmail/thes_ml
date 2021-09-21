@@ -21,15 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%3ijb5ks!-_dqmu65pk64#&chvjsv@u(^i5w!hcy60s^vlqn5='
-#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '%3ijb5ks!-_dqmu65pk64#&chvjsv@u(^i5w!hcy60s^vlqn5=')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == True)
 
-#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-
-ALLOWED_HOSTS = ['thesml.herokuapp.com', '127.0.0.1', 'thesmail.work']
+ALLOWED_HOSTS = ['www.thesmail.work', 'thesmail.work', '127.0.0.1']
 
 
 # Application definition
@@ -124,14 +121,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+#STATIC_DIR = os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = [STATIC_DIR]
 
 STATIC_URL = '/static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-PAGEDOWN_IMAGE_UPLOAD_ENABLED=True
+PAGEDOWN_IMAGE_UPLOAD_ENABLED = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

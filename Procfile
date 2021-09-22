@@ -1,1 +1,0 @@
-web: gunicorn thes_ml.wsgi

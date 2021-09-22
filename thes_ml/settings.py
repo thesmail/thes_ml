@@ -16,19 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == True)
-
-ALLOWED_HOSTS = ['www.thesmail.work', 'thesmail.work', '127.0.0.1']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -73,18 +60,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'thes_ml.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -124,11 +99,19 @@ USE_TZ = True
 #STATIC_DIR = os.path.join(BASE_DIR, 'static')
 #STATICFILES_DIRS = [STATIC_DIR]
 
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 PAGEDOWN_IMAGE_UPLOAD_ENABLED = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *

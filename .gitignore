@@ -1,4 +1,8 @@
 /.idea
 /.venv
+/config
+/staticfiles
+__pycache__
+thes_ml/prod_settings.py
 db.sqlite3
-/static/
+/media/

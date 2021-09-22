@@ -7,3 +7,5 @@ urlpatterns = [
     path('', include('pagedown.urls')),
     path('summernote/', include('django_summernote.urls')),
 ]
+
+handler404 = 'blog.views.error_404'

@@ -7,6 +7,9 @@ from .models import *
 from .utils import ObjectDetailMixin, ObjectCreateMixin
 from .forms import PostForm
 
+def error_404(request, exception):
+    return render(request, 'error/404.html')
+
 def posts_list(request):
     posts = Post.objects.filter(nav_status=False)
     paginator = Paginator(posts, 5)

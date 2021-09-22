@@ -9,6 +9,7 @@ urlpatterns = [
     # path('post/create/', PostCreate.as_view(), name='post_create_url'),
     path('<str:slug>/', PostDetail.as_view(), name='post_detail_url')
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

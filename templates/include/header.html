@@ -1,7 +1,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'posts_list_url' %}">@thes.ml</a>
+        <a class="navbar-brand" href="{% url 'posts_list_url' %}">@thesmail.work</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
@@ -11,8 +11,9 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'posts_list_url' %}">Home</a>
                 </li>
-                {% for n in post_bar  %}
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ n.get_absolute_url }}">{{ n.title }}</a></li>
+                {% for n in post_bar %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                                            href="{{ n.get_absolute_url }}">{{ n.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>

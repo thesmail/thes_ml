@@ -2,12 +2,10 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 
 from .models import *
-# from .views import nav
 
 class ObjectDetailMixin:
     model = None
     template = None
-    # post_bar = None
 
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)

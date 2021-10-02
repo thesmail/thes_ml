@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from django.core.paginator import Paginator
 
@@ -11,7 +11,7 @@ def error_404(request, exception):
     return render(request, 'error/404.html')
 
 def posts_list(request):
-    posts = Post.objects.filter(nav_status=False)
+    posts = Post.objects.filter(nav_status=False, status='published')
     paginator = Paginator(posts, 5)
 
     page_number = request.GET.get('page', 1)
@@ -39,9 +39,15 @@ def posts_list(request):
 
     return render(request, 'blog/posts_list.html', context=context)
 
-class PostDetail(ObjectDetailMixin, View):
-    model = Post
-    template = 'blog/post_detail.html'
+def post_detail(request, slug):
+    post = get_object_or_404(Post.objects.filter(status='published'), slug__iexact=slug)
+
+    context = {
+        'post': post,
+        'post_bar': Post.objects.filter(nav_status=True)
+    }
+
+    return render(request, 'blog/post_detail.html', context=context)
 
 class PostCreate(ObjectCreateMixin, View):
     form_model = PostForm

@@ -10,12 +10,17 @@ def gen_slug(s):
     return new_slug + '-' + str(int(time()))
 
 class Post(models.Model):
+    STATUS_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    )
     title = models.CharField(max_length=100, db_index=True)
     img = models.FileField(blank=True, upload_to="posts/", default='posts/hegel_pink.jpg')
     body = models.TextField(db_index=True)
     quo = models.TextField(max_length=150, blank=True)
     date_pub = models.DateTimeField(auto_now_add=True)
     date_upd = models.DateTimeField(blank=True, null=True, default=datetime.now())
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     nav_status = models.BooleanField(default=False)
     slug = models.SlugField(max_length=150, blank=True, unique=True, db_index=True)
 

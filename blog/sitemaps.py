@@ -9,4 +9,4 @@ class PostSitemap(Sitemap):
         return Post.objects.filter(status='published')
 
     def lastmod(self, obj):
-        return obj.date_pub
+        return obj.date_upd

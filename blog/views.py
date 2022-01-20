@@ -4,11 +4,16 @@ from django.core.paginator import Paginator
 
 
 from .models import *
+from taplink.models import Social
 from .utils import ObjectDetailMixin, ObjectCreateMixin
-from .forms import PostForm
+# from .forms import PostForm
+
+def get_social():
+    social = Social.objects.all()
+    return social
 
 def error_404(request, exception):
-    return render(request, 'error/404.html')
+    return render(request, 'blog/error/404.html')
 
 def posts_list(request):
     posts = Post.objects.filter(nav_status=False, status='published')
@@ -34,7 +39,8 @@ def posts_list(request):
         'is_paginated': is_paginated,
         'next_url': next_url,
         'prev_url': prev_url,
-        'post_bar': Post.objects.filter(nav_status=True)
+        'socials': get_social(),
+        'nav_bar': Post.objects.filter(nav_status=True)
     }
 
     return render(request, 'blog/posts_list.html', context=context)
@@ -44,11 +50,12 @@ def post_detail(request, slug):
 
     context = {
         'post': post,
-        'post_bar': Post.objects.filter(nav_status=True)
+        'post_bar': Post.objects.filter(nav_status=True),
+        'socials': get_social()
     }
 
     return render(request, 'blog/post_detail.html', context=context)
 
-class PostCreate(ObjectCreateMixin, View):
-    form_model = PostForm
-    template = 'blog/post_create_form.html'
+# class PostCreate(ObjectCreateMixin, View):
+#     form_model = PostForm
+#     template = 'blog/post_create_form.html'

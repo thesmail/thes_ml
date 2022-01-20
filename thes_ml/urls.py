@@ -9,6 +9,8 @@ sitemaps = {
 
 urlpatterns = [
     path('golem/', admin.site.urls),
+    path('s/', include('shortURI.urls')),
+    path('go/', include('taplink.urls')),
     path('', include('blog.urls')),
     path('', include('pagedown.urls')),
     path('summernote/', include('django_summernote.urls')),

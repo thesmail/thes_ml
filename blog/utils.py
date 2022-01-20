@@ -12,7 +12,7 @@ class ObjectDetailMixin:
 
         context = {
             self.model.__name__.lower(): obj,
-            'post_bar': self.model.objects.filter(nav_status=True)
+            'nav_bar': self.model.objects.filter(nav_status=True)
         }
 
         return render(request, self.template, context=context)

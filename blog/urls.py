@@ -4,6 +4,8 @@ from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
+appname = "blog"
+
 urlpatterns = [
     path('', posts_list, name='posts_list_url'),
     # path('post/create/', PostCreate.as_view(), name='post_create_url'),
